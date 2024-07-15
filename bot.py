@@ -31,7 +31,7 @@ async def join(ctx):
         await ctx.send("Recording...")
 
 async def finished_callback(sink, ctx):
-    directory = r"C:\Users\aman7\Desktop\DiscordAudio"
+    directory = os.path.join(os.getcwd(), "DiscordAudio")
     if not os.path.exists(directory):
         os.makedirs(directory)
 
