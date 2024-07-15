@@ -25,11 +25,21 @@ async def on_ready():
 @bot.command(name='join', help='Tells the bot to join the voice channel')
 async def join(ctx):
     voice_channel = bot.get_channel(VOICE_CHANNEL_ID)
+    await voice_channel.connect()
+    if voice_channel is None:
+        ctx.send("Unable to join the voice channel")
 
 @bot.command(name='record', help='Tells the bot to record the voice channel')
 async def record(ctx):
+    voice_channel = bot.get_channel(VOICE_CHANNEL_ID)
     if isinstance(voice_channel, discord.VoiceChannel):
-        vc = await voice_channel.connect()
+        if ctx.voice_client is None:
+            vc = await voice_channel.connect()
+        elif ctx.voice_client.channel == voice_channel:
+            vc = ctx.voice_client
+        else:
+            await ctx.voice_client.move_to(voice_channel)
+            vc = ctx.voice_client
         vc.start_recording(discord.sinks.MP3Sink(), finished_callback, ctx)
         await ctx.send("Recording...")
 
@@ -74,6 +84,7 @@ async def translate_audio(ctx, mention: str, language: str):
 
 @bot.command(name='stop_recording', help='Stops the recording')
 async def stop_recording(ctx):
+    voice_client = ctx.guild.voice_client
     if ctx.voice_client:
         ctx.voice_client.stop_recording()
         await ctx.send("Stopped recording.")
