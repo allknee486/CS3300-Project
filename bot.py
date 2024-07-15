@@ -25,6 +25,9 @@ async def on_ready():
 @bot.command(name='join', help='Tells the bot to join the voice channel')
 async def join(ctx):
     voice_channel = bot.get_channel(VOICE_CHANNEL_ID)
+
+@bot.command(name='record', help='Tells the bot to record the voice channel')
+async def record(ctx):
     if isinstance(voice_channel, discord.VoiceChannel):
         vc = await voice_channel.connect()
         vc.start_recording(discord.sinks.MP3Sink(), finished_callback, ctx)
