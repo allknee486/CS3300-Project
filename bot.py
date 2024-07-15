@@ -4,6 +4,7 @@ from discord.ext import commands
 from dotenv import load_dotenv
 import shutil
 import whisper
+from deep_translator import GoogleTranslator
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -74,7 +75,8 @@ async def translate_audio(ctx, mention: str, language: str):
             if os.path.getsize(audio_path) > 0:
                 result = model.transcribe(audio_path, language=language)
                 transcript = result.get('text', 'Transcription not available')
-                await ctx.send(f"Transcription for <@{user_id}>: {transcript}")
+                translated = GoogleTranslator(source='auto', target=language).translate(transcript)
+                await ctx.send(f"Transcription for <@{user_id}>: {translated}")
             else:
                 await ctx.send("Audio file is empty. No transcription made.")
         except Exception as e:
@@ -82,8 +84,8 @@ async def translate_audio(ctx, mention: str, language: str):
     else:
         await ctx.send("Audio file not found.")
 
-@bot.command(name='stop_recording', help='Stops the recording')
-async def stop_recording(ctx):
+@bot.command(name='stop', help='Stops the recording')
+async def stop(ctx):
     voice_client = ctx.guild.voice_client
     if ctx.voice_client:
         ctx.voice_client.stop_recording()
