@@ -1,0 +1,10 @@
+All Commands:
+!join: Tells the bot to join the voice channel
+
+!leave: Tells the bot to leave the voice channel
+
+!record: Tells the bot to record the voice channel until !stop command is entered
+
+!stop: Tells the bot to stop current recording session
+
+!translate @USER language: Translates audio from the @USER recording into the specified language
