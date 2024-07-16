@@ -16,7 +16,7 @@ Finding Token: Create discord bot by going to Discord developer portal: https://
                 Go to "Bot" tab and click "Add Bot".
                 Copy and replace DISCORD_TOKEN in env with your bots token
 Find channel ids:
-                In discord applicaiton enable User Settings > Advanced > Developer Mode
+                In discord application enable User Settings > Advanced > Developer Mode
                 Right click on channel you want bot to type in and click copy ID, replace with DISCORD_GENERAL
                 Same step with voice channels and replace id of that voice channel with DISCORD_VOICE_GENERAL
 Server ID:
