@@ -15,6 +15,12 @@ Finding Token: Create discord bot by going to Discord developer portal: https://
                 Click on New Application
                 Go to "Bot" tab and click "Add Bot".
                 Copy and replace DISCORD_TOKEN in env with your bots token
+Adding the bot to a channel:
+                Go to "OAuth2" tab and select "bot" under OAuth2 URL Generator.
+                Below that, a "Bot Permissions" selection should appear. 
+                Select "Send Messages", "Connect", "Speak", and "Use Voice Activity".
+                Copy and paste the generated url at the bottom of the page to your browser.
+                The website will prompt you on which server to add the bot to (assuming you have signed in).
 Find channel ids:
                 In discord application enable User Settings > Advanced > Developer Mode
                 Right click on channel you want bot to type in and click copy ID, replace with DISCORD_GENERAL
